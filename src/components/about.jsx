@@ -5,7 +5,7 @@ import { FaHouseCrack, FaHammer, FaHouseCircleCheck } from "react-icons/fa6";
 
 const About = () => {
   return (
-    <section className="py-24">
+    <section id="about" className="py-24">
       <MainContainer>
         <header className="flex flex-col items-center justify-center text-center">
           <Title>About Mr. Quick Fix</Title>
@@ -33,7 +33,7 @@ const About = () => {
           </div>
         </header>
         <div className="mx-auto mb-12 mt-6 h-1 max-w-[300px] bg-secondary-200"></div>
-        <section className="text-center font-roboto text-lg font-light text-secondary-600">
+        <section className="text-center font-roboto text-sm font-light text-secondary-600 md:text-lg">
           <p className="my-4">
             At Mr. Quick Fix, we understand the importance of a well-maintained
             home. Our team of skilled professionals is dedicated to providing

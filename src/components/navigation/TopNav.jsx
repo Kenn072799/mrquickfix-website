@@ -6,12 +6,12 @@ const TopNav = () => {
   return (
     <div className="bg-secondary-50 pb-2 pt-3 font-roboto">
       <MainContainer className="flex items-center">
-        <section className="flex w-full text-secondary-900">
+        <section className="flex w-full flex-col text-secondary-900 md:flex-row">
           <p className="text-sm">Powered by</p>
           <a
             target="_blank"
             href="https://www.miescor.ph/home"
-            className="ml-1 text-sm font-semibold underline-offset-4 hover:underline"
+            className="text-xs md:text-sm font-semibold underline-offset-4 hover:underline md:ml-1"
           >
             MIESCOR LOGISTIC, INC.
           </a>

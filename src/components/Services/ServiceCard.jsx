@@ -1,43 +1,70 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { FaAngleUp } from "react-icons/fa6";
+import PopupContactCard from "../Contact/ContactCard/PopupContactCard";
 
 const ServiceCard = ({ servicedata }) => {
-  const [data, setData] = useState(null);
+  const { image, title, description } = servicedata;
 
-  useEffect(() => {
-    fetch("/SampleData/ServicesData.json")
-      .then((response) => response.json())
-      .then((jsonData) => {
-        const service = jsonData.find((item) => item.id === servicedata.id);
-        setData(service);
-      })
-      .catch((error) => console.error("Error loading JSON:", error));
-  }, [servicedata.id]);
-
-  if (!data) return <p>Loading...</p>;
+  const [isHovered, setIsHovered] = useState(false);
+  const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
-    <div className="p-2 relative group cursor-default">
-      <div className="relative">
-        <img src={data.image} alt={data.title} className="w-[350px]" />
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="text-xl font-roboto text-white font-medium text-center">
-            {data.title}
+    <div
+      className="group relative cursor-default p-2"
+      onMouseLeave={() => {
+        setIsDescriptionVisible(false);
+        setIsHovered(false);
+      }}
+    >
+      <div
+        className="relative overflow-hidden"
+        onClick={() => setIsDescriptionVisible(!isDescriptionVisible)}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <img src={image} alt={title} className="w-[350px]" />
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="text-center font-roboto text-xl font-medium text-white">
+            {title}
           </div>
         </div>
-        <div className="absolute inset-0 bg-primary-500 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 ease-in-out transition-opacity duration-300">
-          <div className="text-white text-center px-4 font-medium">
-            {data.description}
+        <div className="absolute inset-x-0 bottom-0 flex flex-col items-center justify-center bg-gradient-to-t from-black/60 to-transparent py-4 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+          <div className="px-5 text-center font-medium text-white">
+            <FaAngleUp
+              className={`mx-auto text-2xl transition-transform duration-300 ${
+                isHovered ? "translate-y-0" : "translate-y-2"
+              } ${isDescriptionVisible ? "rotate-180" : ""}`}
+            />
           </div>
-          <div className="absolute bottom-3 font-extralight flex items-center justify-center">
-            <p className="text-sm text-white pr-1">
+        </div>
+        <div
+          className={`absolute inset-0 border-2 border-primary-500 bg-secondary-950 p-4 text-white transition-transform duration-500 ease-in-out ${
+            isDescriptionVisible
+              ? "translate-y-0 opacity-100"
+              : "translate-y-full"
+          }`}
+        >
+          <div className="flex h-full w-full items-center justify-center text-center font-roboto text-sm font-medium md:text-base">
+            <p>{description}</p>
+          </div>
+          <div className="absolute bottom-0 left-0 right-0 py-2 text-center text-xs font-light md:text-sm">
+            <p>
               Interested in this service?
+              <button className="pl-1 hover:underline" onClick={openModal}>
+                Contact us!
+              </button>
             </p>
-            <button className=" text-white text-sm hover:underline">
-              Contact us
-            </button>
           </div>
         </div>
       </div>
+      <PopupContactCard isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 };
