@@ -6,6 +6,7 @@ import {
   FaEnvelope,
   FaLocationDot,
 } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 // Lazy load
 const FooterProjectCard = lazy(() => import("./FooterProjectCard"));
@@ -48,8 +49,8 @@ const Footer = () => {
   return (
     <div className="relative bg-secondary-950 pt-24">
       <div className="mx-auto max-w-[1540px] px-4 pb-16">
-        <nav className="grid gap-x-5 sm:grid-cols-2 md:gap-x-1 lg:grid-cols-4">
-          <div>
+        <nav className="grid gap-x-5 sm:grid-cols-2 md:gap-x-1 lg:grid-cols-3">
+          <div className="md:px-4">
             <h1 className="pb-8 font-outfit uppercase text-white md:text-lg">
               About Us
             </h1>
@@ -68,7 +69,7 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <div>
+          <div className="md:px-4">
             <h1 className="pb-8 font-outfit uppercase text-white md:text-lg">
               Navigation
             </h1>
@@ -93,7 +94,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="text-sm md:text-base">
+          <div className="text-sm md:px-4 md:text-base">
             <h1 className="mt-8 pb-8 font-outfit uppercase text-white md:mt-0 md:text-lg">
               Contact Information
             </h1>
@@ -160,22 +161,6 @@ const Footer = () => {
                 <br />
                 Meralco Avenue, Ortigas Center Pasig City, Philippines 1600
               </a>
-            </div>
-          </div>
-          <div>
-            <h1 className="mt-8 pb-8 font-outfit uppercase text-white md:mt-0 md:text-lg">
-              Explore Recent Projects
-            </h1>
-            <div className="flex">
-              <Suspense fallback={<p>Loading projects...</p>}>
-                {data.length > 0 ? (
-                  data.map((project) => (
-                    <FooterProjectCard key={project.id} projectdata={project} />
-                  ))
-                ) : (
-                  <p>No projects available.</p>
-                )}
-              </Suspense>
             </div>
           </div>
         </nav>

@@ -1,60 +1,21 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import MainContainer from "../Container/MainContainer";
 import Title from "../Title/Title";
 import SubTitle from "../Title/SubTitle";
-import { PiArrowRightLight } from "react-icons/pi";
+import useTestimonials from "../hooks/useTestimonials";
 
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/bundle";
 import { Pagination, Autoplay, A11y } from "swiper/modules";
-import Button from "../button";
 
 // Lazy load
 const TestimonialCard = lazy(() => import("./TestimonialCard"));
 
 const Testimonials = () => {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
+  const { data, error, loading } = useTestimonials(10);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/SampleData/TestimonialData.json");
-        if (!response.ok) throw new Error("Network response was not ok");
-        const jsonData = await response.json();
-
-        // Validate data structure
-        const validatedData = jsonData
-          .filter(
-            (item) =>
-              item &&
-              item.id &&
-              item.name &&
-              item.image &&
-              item.feedback &&
-              item.date,
-          )
-          .map((item) => ({
-            id: item.id,
-            name: item.name,
-            image: item.image,
-            feedback: item.feedback,
-            date: item.date,
-          }))
-          .sort((a, b) => new Date(b.date) - new Date(a.date))
-          .slice(0, 6);
-
-        setData(validatedData);
-      } catch (error) {
-        console.error("Error loading JSON:", error);
-        setError("Failed to load testimonials.");
-      }
-    };
-
-    fetchData();
-  }, []);
-
+  if (loading) return <p>Loading testimonials...</p>;
   if (error) return <p>{error}</p>;
 
   return (
@@ -93,12 +54,6 @@ const Testimonials = () => {
             )}
           </Suspense>
         </section>
-        <div className="flex justify-center pt-4">
-          <Button variant="flex">
-            View more testimonials
-            <PiArrowRightLight className="ml-2 text-xl" />
-          </Button>
-        </div>
       </MainContainer>
     </div>
   );

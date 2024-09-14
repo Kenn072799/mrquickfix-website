@@ -79,7 +79,9 @@ const MainNav = () => {
             <li>Contact us</li>
           </NavLink>
         </ul>
-        <MobileNav />
+        <div className="absolute right-1 top-3 md:hidden">
+          <MobileNav />
+        </div>
       </MainContainer>
     </nav>
   );

@@ -5,7 +5,6 @@ import { Route, Routes } from "react-router-dom";
 //Pages
 import HomePage from "./pages/HomePage";
 import ProjectPage from "./pages/ProjectPage";
-import TestimonialPage from "./pages/TestimonialPage";
 
 function App() {
   return (
@@ -15,7 +14,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/Project" element={<ProjectPage />} />
-          <Route path="/Testimonial" element={<TestimonialPage />} />
         </Routes>
       </MainLayout>
     </>
