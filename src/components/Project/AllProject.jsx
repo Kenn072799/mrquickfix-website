@@ -1,4 +1,3 @@
-// AllProject.js
 import React, { useState } from "react";
 import MainContainer from "../Container/MainContainer";
 import Title from "../Title/Title";
@@ -6,6 +5,7 @@ import SubTitle from "../Title/SubTitle";
 import useProjects from "../hooks/useProjects";
 import ProjectCardList from "./ProjectCardList";
 import ErrorProject from "../Loader/ErrorProject";
+import SpinLoader from "../Loader/SpinLoader";
 
 const AllProject = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -118,12 +118,18 @@ const AllProject = () => {
           )}
         </div>
 
-        {error ? (
+        {/* Handling loading and error states */}
+        {loading ? (
+          <div className="flex justify-center py-10">
+            <SpinLoader />
+          </div>
+        ) : error ? (
           <ErrorProject message={error} />
         ) : (
           <ProjectCardList data={data} loading={loading} />
         )}
 
+        {/* Pagination */}
         <div className="mb-24 mt-14 flex justify-center border-b border-t py-2 md:text-sm">
           {currentPage > 1 && (
             <>

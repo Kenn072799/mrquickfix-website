@@ -56,7 +56,7 @@ const MainNav = () => {
             Contact Us
           </li>
         </ul>
-        <div className="absolute right-1 top-3 md:hidden">
+        <div className="absolute right-1 top-2 md:hidden">
           <MobileNav />
         </div>
       </MainContainer>

@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 import useProjects from "../hooks/useProjects";
 import ProjectCardList from "./ProjectCardList";
 import ErrorProject from "../Loader/ErrorProject";
+import SpinLoader from "../Loader/SpinLoader";
 
 const Project = () => {
   const { data, error, loading } = useProjects({ limit: 6 });
@@ -20,7 +21,12 @@ const Project = () => {
           <SubTitle>Explore Our Latest Work and Achievements</SubTitle>
         </header>
 
-        {error ? (
+        {/* Handling loading and error states */}
+        {loading ? (
+          <div className="flex justify-center py-10">
+            <SpinLoader />
+          </div>
+        ) : error ? (
           <ErrorProject message={error} />
         ) : (
           <ProjectCardList data={data} loading={loading} />

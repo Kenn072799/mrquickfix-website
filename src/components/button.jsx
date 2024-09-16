@@ -3,9 +3,11 @@ import clsx from "clsx";
 
 const Button = ({ variant = "primary", size = "md", children, ...props }) => {
   const variantStyle = {
-    primary: "bg-primary-500 text-sm md:text-base text-white hover:bg-primary-600",
-    outline: "bg-primary-500 text-sm md:text-base text-white hover:bg-primary-600 border border-white",
-    flex: "bg-primary-500 text-sm md:text-base text-white hover:bg-primary-600 flex items-center justify-center"
+    primary:
+      "bg-primary-500 text-sm md:text-base text-white hover:bg-primary-600",
+    outline:
+      "bg-primary-500 text-sm md:text-base text-white hover:bg-primary-600 border border-white",
+    flex: "bg-primary-500 text-sm md:text-base text-white hover:bg-primary-600 flex items-center justify-center",
   };
 
   const sizeStyle = {

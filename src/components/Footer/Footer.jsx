@@ -29,7 +29,10 @@ const Footer = () => {
               <p className="text-pretty py-8 font-roboto text-sm text-secondary-500 md:text-base">
                 At Mr. Quick Fix, we understand the importance of a
                 well-maintained home.
-                <button className="pl-1 font-medium text-secondary-500/50 duration-300 hover:text-secondary-400">
+                <button
+                  className="pl-1 font-medium text-secondary-500/50 duration-300 hover:text-secondary-400"
+                  onClick={() => scrollToPage("about")}
+                >
                   Read more.
                 </button>
               </p>
@@ -111,7 +114,7 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-            <div className="flex items-center py-2 font-roboto text-secondary-500">
+            <div className="flex items-center py-2 font-roboto text-sm text-secondary-500 md:text-base">
               <FaEnvelope size={20} className="mr-4 text-secondary-500" />
               <a
                 href="mailto:mrquickfix@miescor.ph"
@@ -120,7 +123,7 @@ const Footer = () => {
                 mrquickfix@miescor.ph
               </a>
             </div>
-            <div className="flex items-center py-2 font-roboto text-secondary-500">
+            <div className="flex items-center py-2 font-roboto text-sm text-secondary-500 md:text-base">
               <FaFacebookF size={20} className="mr-4 text-secondary-500" />
               <a
                 target="_blank"
@@ -131,7 +134,7 @@ const Footer = () => {
                 facebook.com/MLIMrQuickFix
               </a>
             </div>
-            <div className="flex items-center text-pretty">
+            <div className="flex items-center text-pretty text-sm md:text-base">
               <FaLocationDot size={20} className="text-secondary-500" />
               <a
                 target="_blank"

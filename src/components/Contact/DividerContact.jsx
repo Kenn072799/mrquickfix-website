@@ -33,7 +33,7 @@ const DividerContact = () => {
           </div>
         </MainContainer>
       </div>
-      <PopupContactCard isOpen={isModalOpen} onClose={closeModal}/>
+      <PopupContactCard isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 };

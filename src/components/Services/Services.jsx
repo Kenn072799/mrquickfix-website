@@ -1,48 +1,17 @@
-import React, { useEffect, useState, Suspense } from "react";
+import React, { Suspense } from "react";
 import MainContainer from "../Container/MainContainer";
 import Title from "../Title/Title";
 import Subtitle from "../Title/SubTitle";
 import SpinLoader from "../Loader/SpinLoader";
 import NoServiceAvailable from "../Loader/NoServiceAvailable";
+import ErrorProject from "../Loader/ErrorProject";
+import useServicesData from "../hooks/useServices";
 
 // Lazy load
 const ServiceCard = React.lazy(() => import("./ServiceCard"));
 
 const Services = () => {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/SampleData/ServicesData.json");
-        if (!response.ok) throw new Error("Network response was not ok");
-        const jsonData = await response.json();
-
-        // Validate data structure
-        const validatedData = jsonData
-          .filter(
-            (item) =>
-              item && item.id && item.title && item.image && item.description,
-          )
-          .map((item) => ({
-            id: item.id,
-            title: item.title,
-            image: item.image,
-            description: item.description,
-          }));
-
-        setData(validatedData);
-      } catch (error) {
-        console.error("Error loading JSON:", error);
-        setError("Failed to load services.");
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (error) return <p>{error}</p>;
+  const { data, error, loading } = useServicesData();
 
   return (
     <div id="service" className="py-24">
@@ -59,7 +28,14 @@ const Services = () => {
               </div>
             }
           >
-            {data.length > 0 ? (
+            {/* Check error and loading state inside Suspense */}
+            {loading ? (
+              <div className="flex justify-center">
+                <SpinLoader />
+              </div>
+            ) : error ? (
+              <ErrorProject message={error} />
+            ) : data.length > 0 ? (
               data.map((service) => (
                 <ServiceCard key={service.id} servicedata={service} />
               ))

@@ -40,7 +40,7 @@ const MobileNav = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed -left-[1px] top-0 z-50 h-full w-1/2 border-r border-primary-500 bg-white transition-transform duration-300 ease-in-out ${
+        className={`fixed -left-[1px] top-0 z-50 h-full w-1/2 border-r border-primary-500 bg-white font-roboto transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0 transform" : "-translate-x-full transform"
         }`}
       >
@@ -50,7 +50,7 @@ const MobileNav = () => {
               scrollToPage("home");
               toggleMenu();
             }}
-            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
+            className="w-full py-6 text-center active:bg-secondary-100"
           >
             Home
           </div>
@@ -59,7 +59,7 @@ const MobileNav = () => {
               scrollToPage("about");
               toggleMenu();
             }}
-            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
+            className="w-full py-6 text-center active:bg-secondary-100"
           >
             About Us
           </div>
@@ -68,7 +68,7 @@ const MobileNav = () => {
               scrollToPage("service");
               toggleMenu();
             }}
-            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
+            className="w-full py-6 text-center active:bg-secondary-100"
           >
             Services
           </div>
@@ -77,7 +77,7 @@ const MobileNav = () => {
               scrollToPage("project");
               toggleMenu();
             }}
-            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
+            className="w-full py-6 text-center active:bg-secondary-100"
           >
             Projects
           </div>
@@ -86,7 +86,7 @@ const MobileNav = () => {
               scrollToPage("testimonial");
               toggleMenu();
             }}
-            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
+            className="w-full py-6 text-center active:bg-secondary-100"
           >
             Testimonials
           </div>
@@ -95,7 +95,7 @@ const MobileNav = () => {
               scrollToPage("contact");
               toggleMenu();
             }}
-            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
+            className="w-full py-6 text-center active:bg-secondary-100"
           >
             Contact Us
           </div>
