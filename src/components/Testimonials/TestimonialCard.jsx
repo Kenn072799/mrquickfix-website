@@ -8,7 +8,7 @@ const TestimonialCard = ({ testimonialdata }) => {
     <div className="relative">
       <BiSolidQuoteLeft className="absolute bottom-0 right-0 top-[-25%] m-4 scale-x-[-1] text-[100px] text-primary-500 md:top-[-30%] md:text-[130px]" />
       <BiSolidQuoteLeft className="absolute bottom-0 left-0 top-[75%] m-4 text-[100px] text-primary-500 md:top-[70%] md:text-[130px]" />
-      <div className="my-12 min-h-[300px] cursor-default rounded-md bg-white/90 backdrop-blur-sm lg:max-w-[600px]">
+      <div className="my-24 min-h-[300px] cursor-default rounded-md bg-white/90 backdrop-blur-sm lg:max-w-[600px]">
         <div className="flex border-b">
           <img
             src={image}
