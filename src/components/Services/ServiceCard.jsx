@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaAngleUp } from "react-icons/fa6";
 import PopupContactCard from "../Contact/ContactCard/PopupContactCard";
 
+// AOS
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const ServiceCard = ({ servicedata }) => {
   const { image, title, description } = servicedata;
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
 
   const [isHovered, setIsHovered] = useState(false);
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
@@ -29,9 +40,19 @@ const ServiceCard = ({ servicedata }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <img src={image} alt={title} className="w-[350px]" />
+        <img
+          src={image}
+          alt={title}
+          className="h-[250px] w-[350px]"
+          data-aos="zoom-out"
+          data-aos-delay="100"
+        />
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="text-center font-roboto text-xl font-medium text-white">
+          <div
+            className="text-center font-roboto text-xl font-medium text-white"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             {title}
           </div>
         </div>

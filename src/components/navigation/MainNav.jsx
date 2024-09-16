@@ -2,82 +2,59 @@ import React from "react";
 import MainContainer from "../Container/MainContainer";
 import MainLogo from "../../assets/Mr.QuickFixLogo.png";
 import MobileNav from "./MobileNav";
-import { NavLink, Link } from "react-router-dom";
+import useScrollToPage from "../hooks/useScrollToPage";
 
 const MainNav = () => {
+  const scrollToPage = useScrollToPage();
+
   return (
     <nav className="sticky top-1 z-10 bg-white shadow-sm">
       <MainContainer className="flex flex-col lg:flex-row lg:items-center">
         <header className="py-4 lg:py-0">
-          <Link to="/">
-            <img
-              src={MainLogo}
-              alt="Mr. QuickFix Logo"
-              className="flex w-[180px] py-1 md:py-0 lg:w-[250px]"
-            />
-          </Link>
+          <img
+            src={MainLogo}
+            alt="Mr. QuickFix Logo"
+            className="flex w-[180px] cursor-pointer lg:w-[250px]"
+            onClick={() => scrollToPage("home")}
+          />
         </header>
         <ul className="hidden w-full flex-wrap justify-center font-roboto text-lg text-secondary-600 md:flex lg:justify-end">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive
-                ? "border-b-[3px] border-primary-500 px-4 py-6 text-secondary-950"
-                : "border-b-[3px] border-transparent px-4 py-6 hover:border-primary-500 hover:text-secondary-950"
-            }
+          <li
+            onClick={() => scrollToPage("home")}
+            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
           >
-            <li>Home</li>
-          </NavLink>
-          <NavLink
-            to="about"
-            className={({ isActive }) =>
-              isActive
-                ? "border-b-[3px] border-primary-500 px-4 py-6 text-secondary-950"
-                : "border-b-[3px] border-transparent px-4 py-6 hover:border-primary-500 hover:text-secondary-950"
-            }
+            Home
+          </li>
+          <li
+            onClick={() => scrollToPage("about")}
+            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
           >
-            <li>About us</li>
-          </NavLink>
-          <NavLink
-            to="service"
-            className={({ isActive }) =>
-              isActive
-                ? "border-b-[3px] border-primary-500 px-4 py-6 text-secondary-950"
-                : "border-b-[3px] border-transparent px-4 py-6 hover:border-primary-500 hover:text-secondary-950"
-            }
+            About Us
+          </li>
+          <li
+            onClick={() => scrollToPage("service")}
+            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
           >
-            <li>Services</li>
-          </NavLink>
-          <NavLink
-            to="project"
-            className={({ isActive }) =>
-              isActive
-                ? "border-b-[3px] border-primary-500 px-4 py-6 text-secondary-950"
-                : "border-b-[3px] border-transparent px-4 py-6 hover:border-primary-500 hover:text-secondary-950"
-            }
+            Services
+          </li>
+          <li
+            onClick={() => scrollToPage("project")}
+            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
           >
-            <li>Projects</li>
-          </NavLink>
-          <NavLink
-            to="testimonial"
-            className={({ isActive }) =>
-              isActive
-                ? "border-b-[3px] border-primary-500 px-4 py-6 text-secondary-950"
-                : "border-b-[3px] border-transparent px-4 py-6 hover:border-primary-500 hover:text-secondary-950"
-            }
+            Projects
+          </li>
+          <li
+            onClick={() => scrollToPage("testimonial")}
+            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
           >
-            <li>Testimonials</li>
-          </NavLink>
-          <NavLink
-            to="contact"
-            className={({ isActive }) =>
-              isActive
-                ? "border-b-[3px] border-primary-500 px-4 py-6 text-secondary-950"
-                : "border-b-[3px] border-transparent px-4 py-6 hover:border-primary-500 hover:text-secondary-950"
-            }
+            Testimonials
+          </li>
+          <li
+            onClick={() => scrollToPage("contact")}
+            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
           >
-            <li>Contact us</li>
-          </NavLink>
+            Contact Us
+          </li>
         </ul>
         <div className="absolute right-1 top-3 md:hidden">
           <MobileNav />

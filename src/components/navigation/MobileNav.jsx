@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import { HiOutlineX, HiMenu } from "react-icons/hi";
+import useScrollToPage from "../hooks/useScrollToPage";
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const scrollToPage = useScrollToPage();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -39,77 +40,65 @@ const MobileNav = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed left-0 top-0 z-50 h-full w-1/2 border-r border-primary-500 bg-white transition-transform duration-300 ease-in-out ${
+        className={`fixed -left-[1px] top-0 z-50 h-full w-1/2 border-r border-primary-500 bg-white transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0 transform" : "-translate-x-full transform"
         }`}
       >
         <div className="mt-20 flex flex-col items-center justify-center">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive
-                ? "border-b-[3px] border-primary-500 py-6 text-secondary-950"
-                : "border-b-[3px] border-transparent py-6 hover:border-primary-500 hover:text-secondary-950"
-            }
-            onClick={toggleMenu}
+          <div
+            onClick={() => {
+              scrollToPage("home");
+              toggleMenu();
+            }}
+            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
           >
             Home
-          </NavLink>
-          <NavLink
-            to="about"
-            className={({ isActive }) =>
-              isActive
-                ? "border-b-[3px] border-primary-500 py-6 text-secondary-950"
-                : "border-b-[3px] border-transparent py-6 hover:border-primary-500 hover:text-secondary-950"
-            }
-            onClick={toggleMenu}
+          </div>
+          <div
+            onClick={() => {
+              scrollToPage("about");
+              toggleMenu();
+            }}
+            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
           >
-            About us
-          </NavLink>
-          <NavLink
-            to="service"
-            className={({ isActive }) =>
-              isActive
-                ? "border-b-[3px] border-primary-500 py-6 text-secondary-950"
-                : "border-b-[3px] border-transparent py-6 hover:border-primary-500 hover:text-secondary-950"
-            }
-            onClick={toggleMenu}
+            About Us
+          </div>
+          <div
+            onClick={() => {
+              scrollToPage("service");
+              toggleMenu();
+            }}
+            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
           >
             Services
-          </NavLink>
-          <NavLink
-            to="project"
-            className={({ isActive }) =>
-              isActive
-                ? "border-b-[3px] border-primary-500 py-6 text-secondary-950"
-                : "border-b-[3px] border-transparent py-6 hover:border-primary-500 hover:text-secondary-950"
-            }
-            onClick={toggleMenu}
+          </div>
+          <div
+            onClick={() => {
+              scrollToPage("project");
+              toggleMenu();
+            }}
+            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
           >
             Projects
-          </NavLink>
-          <NavLink
-            to="testimonial"
-            className={({ isActive }) =>
-              isActive
-                ? "border-b-[3px] border-primary-500 py-6 text-secondary-950"
-                : "border-b-[3px] border-transparent py-6 hover:border-primary-500 hover:text-secondary-950"
-            }
-            onClick={toggleMenu}
+          </div>
+          <div
+            onClick={() => {
+              scrollToPage("testimonial");
+              toggleMenu();
+            }}
+            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
           >
             Testimonials
-          </NavLink>
-          <NavLink
-            to="contact"
-            className={({ isActive }) =>
-              isActive
-                ? "border-b-[3px] border-primary-500 py-6 text-secondary-950"
-                : "border-b-[3px] border-transparent py-6 hover:border-primary-500 hover:text-secondary-950"
-            }
-            onClick={toggleMenu}
+          </div>
+          <div
+            onClick={() => {
+              scrollToPage("contact");
+              toggleMenu();
+            }}
+            className="cursor-pointer px-4 py-6 hover:text-secondary-950"
           >
-            Contact us
-          </NavLink>
+            Contact Us
+          </div>
         </div>
       </div>
     </div>

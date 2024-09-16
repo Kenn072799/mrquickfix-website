@@ -3,6 +3,9 @@ import MainContainer from "../Container/MainContainer";
 import Title from "../Title/Title";
 import SubTitle from "../Title/SubTitle";
 import useTestimonials from "../hooks/useTestimonials";
+import NoTestimonialAvailable from "../Loader/NoTestimonialAvailable";
+import SpinLoaderNoBg from "../Loader/SpinLoaderNoBg";
+import ErrorTestimonial from "../Loader/ErrorTestimonial";
 
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,10 +16,7 @@ import { Pagination, Autoplay, A11y } from "swiper/modules";
 const TestimonialCard = lazy(() => import("./TestimonialCard"));
 
 const Testimonials = () => {
-  const { data, error, loading } = useTestimonials(10);
-
-  if (loading) return <p>Loading testimonials...</p>;
-  if (error) return <p>{error}</p>;
+  const { data, error, loading } = useTestimonials();
 
   return (
     <div id="testimonial" className="bg-secondary-100 py-24">
@@ -26,12 +26,19 @@ const Testimonials = () => {
           <SubTitle>Hear Directly from Those We've Served</SubTitle>
         </header>
         <section className="flex justify-center">
-          <Suspense fallback={<p>Loading testimonials...</p>}>
-            {data.length > 0 ? (
+          <Suspense
+            fallback={
+              <div className="flex justify-center">
+                <SpinLoaderNoBg />
+              </div>
+            }
+          >
+            {error ? (
+              <ErrorTestimonial message={error} />
+            ) : data.length > 0 ? (
               <Swiper
                 modules={[Pagination, Autoplay, A11y]}
                 spaceBetween={50}
-                pagination={{ clickable: true }}
                 autoplay={{ delay: 5000 }}
                 breakpoints={{
                   640: {
@@ -45,12 +52,15 @@ const Testimonials = () => {
               >
                 {data.map((testimonial) => (
                   <SwiperSlide key={testimonial.id}>
-                    <TestimonialCard testimonialdata={testimonial} />
+                    <TestimonialCard
+                      testimonialdata={testimonial}
+                      loading={loading}
+                    />
                   </SwiperSlide>
                 ))}
               </Swiper>
             ) : (
-              <p>No testimonials available.</p>
+              <NoTestimonialAvailable />
             )}
           </Suspense>
         </section>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Hero from "../components/Hero";
+import Hero from "../components/Hero/Hero";
 import About from "../components/about";
 import Services from "../components/Services/Services";
 import DividerContact from "../components/Contact/DividerContact";

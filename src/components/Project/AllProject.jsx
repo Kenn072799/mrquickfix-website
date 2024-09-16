@@ -1,11 +1,11 @@
-import React, { lazy, Suspense, useState } from "react";
+// AllProject.js
+import React, { useState } from "react";
 import MainContainer from "../Container/MainContainer";
 import Title from "../Title/Title";
 import SubTitle from "../Title/SubTitle";
 import useProjects from "../hooks/useProjects";
-
-// Lazy load
-const ProjectCard = lazy(() => import("./ProjectCard"));
+import ProjectCardList from "./ProjectCardList";
+import ErrorProject from "../Loader/ErrorProject";
 
 const AllProject = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -18,6 +18,7 @@ const AllProject = () => {
     projectsPerPage,
     currentPage,
   });
+
   const categories = [
     "Latest",
     "Fits-out",
@@ -28,22 +29,26 @@ const AllProject = () => {
     "Outdoor and Landscaping",
     "Household Cleaning Services",
   ];
+
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
     setCurrentPage(1);
     setIsDropdownOpen(false);
   };
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
   const handleClick = (pageNumber) => {
     setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const totalPages = Math.ceil(totalProjects / projectsPerPage);
+
   const getPaginationGroup = () => {
     let startPage, endPage;
-
     if (totalPages <= 3) {
       startPage = 1;
       endPage = totalPages;
@@ -59,15 +64,11 @@ const AllProject = () => {
         endPage = currentPage + 1;
       }
     }
-
     return Array.from(
       { length: endPage - startPage + 1 },
       (_, i) => startPage + i,
     );
   };
-
-  if (loading) return <p>Loading projects...</p>;
-  if (error) return <p>{error}</p>;
 
   return (
     <div>
@@ -77,7 +78,6 @@ const AllProject = () => {
           <SubTitle>A showcase of our excellence in every project.</SubTitle>
         </header>
 
-        {/* Dropdown for Category Filtering */}
         <div className="relative inline-block pb-8 text-left">
           <button
             type="button"
@@ -118,20 +118,12 @@ const AllProject = () => {
           )}
         </div>
 
-        {/* Project Cards */}
-        <Suspense fallback={<p>Loading projects...</p>}>
-          <section className="flex flex-wrap items-center justify-center">
-            {data.length > 0 ? (
-              data.map((project) => (
-                <ProjectCard key={project.id} projectdata={project} />
-              ))
-            ) : (
-              <p>No projects available.</p>
-            )}
-          </section>
-        </Suspense>
+        {error ? (
+          <ErrorProject message={error} />
+        ) : (
+          <ProjectCardList data={data} loading={loading} />
+        )}
 
-        {/* Pagination */}
         <div className="mb-24 mt-14 flex justify-center border-b border-t py-2 md:text-sm">
           {currentPage > 1 && (
             <>

@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImageModal from "./ImageModal";
+
+//AOS
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const ProjectCard = ({ projectdata }) => {
   const { thumbnail, name, images, category, date } = projectdata;
@@ -10,13 +14,23 @@ const ProjectCard = ({ projectdata }) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => { 
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
+
   return (
-    <div className="group relative m-2 w-[380px] overflow-hidden md:w-[300px]">
+    <div className="group relative m-2 h-[250px] w-[350px] overflow-hidden">
       <img
         src={thumbnail}
         alt={name}
-        className="h-auto w-full cursor-pointer"
+        className="h-full w-full cursor-pointer"
         onClick={openModal}
+        data-aos="zoom-out"
+        data-aos-delay="100"
       />
 
       <div

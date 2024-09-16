@@ -7,7 +7,7 @@ const useTestimonials = (limit = null) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true); // Set loading to true at the start
+      setLoading(true);
       try {
         const response = await fetch("/SampleData/TestimonialData.json");
         if (!response.ok) throw new Error("Network response was not ok");

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import SpinLoaderNoBg from "../Loader/SpinLoaderNoBg";
 
 const ImageModal = ({ isOpen, onRequestClose, images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -73,7 +74,6 @@ const ImageModal = ({ isOpen, onRequestClose, images }) => {
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("touchstart", handleTouchStart);
 
-    // Cleanup
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("touchstart", handleTouchStart);
@@ -104,7 +104,7 @@ const ImageModal = ({ isOpen, onRequestClose, images }) => {
       >
         {loading ? (
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70">
-            <div className="h-16 w-16 animate-spin rounded-full border-b-4 border-t-4 border-solid border-primary-500"></div>
+            <SpinLoaderNoBg />
           </div>
         ) : null}
         <img

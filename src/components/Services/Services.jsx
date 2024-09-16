@@ -2,6 +2,8 @@ import React, { useEffect, useState, Suspense } from "react";
 import MainContainer from "../Container/MainContainer";
 import Title from "../Title/Title";
 import Subtitle from "../Title/SubTitle";
+import SpinLoader from "../Loader/SpinLoader";
+import NoServiceAvailable from "../Loader/NoServiceAvailable";
 
 // Lazy load
 const ServiceCard = React.lazy(() => import("./ServiceCard"));
@@ -50,13 +52,19 @@ const Services = () => {
           <Subtitle>Services You Can Count On Fast and Reliable</Subtitle>
         </header>
         <section className="flex flex-wrap items-center justify-center">
-          <Suspense fallback={<p>Loading services...</p>}>
+          <Suspense
+            fallback={
+              <div className="flex justify-center">
+                <SpinLoader />
+              </div>
+            }
+          >
             {data.length > 0 ? (
               data.map((service) => (
                 <ServiceCard key={service.id} servicedata={service} />
               ))
             ) : (
-              <p>No services available.</p>
+              <NoServiceAvailable />
             )}
           </Suspense>
         </section>

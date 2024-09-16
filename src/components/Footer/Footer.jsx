@@ -1,4 +1,4 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React from "react";
 import MainLogo from "../../assets/Mr.QuickFixLogo.png";
 import {
   FaPhone,
@@ -6,49 +6,15 @@ import {
   FaEnvelope,
   FaLocationDot,
 } from "react-icons/fa6";
-import { Link } from "react-router-dom";
-
-// Lazy load
-const FooterProjectCard = lazy(() => import("./FooterProjectCard"));
+import useScrollToPage from "../hooks/useScrollToPage";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/SampleData/ProjectData.json");
-        if (!response.ok) throw new Error("Network response was not ok");
-        const jsonData = await response.json();
-
-        // Validate and sort data
-        const validatedData = jsonData
-          .filter((item) => item && item.id && item.thumbnail && item.date)
-          .map((item) => ({
-            id: item.id,
-            thumbnail: item.thumbnail,
-            date: item.date,
-          }))
-          .sort((a, b) => new Date(b.date) - new Date(a.date))
-          .slice(0, 3);
-
-        setData(validatedData);
-      } catch (error) {
-        console.error("Error loading JSON:", error);
-        setError("Failed to load projects.");
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (error) return <p>{error}</p>;
+  const scrollToPage = useScrollToPage();
 
   return (
     <div className="relative bg-secondary-950 pt-24">
-      <div className="mx-auto max-w-[1540px] px-4 pb-16">
+      <div className="mx-auto max-w-[1240px] px-4 pb-16">
         <nav className="grid gap-x-5 sm:grid-cols-2 md:gap-x-1 lg:grid-cols-3">
           <div className="md:px-4">
             <h1 className="pb-8 font-outfit uppercase text-white md:text-lg">
@@ -74,31 +40,49 @@ const Footer = () => {
               Navigation
             </h1>
             <ul className="grid grid-cols-2 font-roboto text-sm text-secondary-500 md:gap-y-4 md:text-base">
-              <li className="py-1 duration-300 hover:text-secondary-400">
+              <li
+                onClick={() => scrollToPage("home")}
+                className="cursor-pointer py-1 duration-300 hover:text-secondary-400"
+              >
                 Home
               </li>
-              <li className="py-1 duration-300 hover:text-secondary-400">
+              <li
+                onClick={() => scrollToPage("about")}
+                className="cursor-pointer py-1 duration-300 hover:text-secondary-400"
+              >
                 About us
               </li>
-              <li className="py-1 duration-300 hover:text-secondary-400">
+              <li
+                onClick={() => scrollToPage("service")}
+                className="cursor-pointer py-1 duration-300 hover:text-secondary-400"
+              >
                 Services
               </li>
-              <li className="py-1 duration-300 hover:text-secondary-400">
+              <li
+                onClick={() => scrollToPage("project")}
+                className="cursor-pointer py-1 duration-300 hover:text-secondary-400"
+              >
                 Projects
               </li>
-              <li className="py-1 duration-300 hover:text-secondary-400">
+              <li
+                onClick={() => scrollToPage("testimonial")}
+                className="cursor-pointer py-1 duration-300 hover:text-secondary-400"
+              >
                 Testimonials
               </li>
-              <li className="py-1 duration-300 hover:text-secondary-400">
+              <li
+                onClick={() => scrollToPage("contact")}
+                className="cursor-pointer py-1 duration-300 hover:text-secondary-400"
+              >
                 Contact us
               </li>
             </ul>
           </div>
-          <div className="text-sm md:px-4 md:text-base">
+          <div className="md:px-4">
             <h1 className="mt-8 pb-8 font-outfit uppercase text-white md:mt-0 md:text-lg">
               Contact Information
             </h1>
-            <div className="flex items-center">
+            <div className="flex items-center text-sm md:text-base">
               <FaPhone size={20} className="group mr-4 text-secondary-500" />
               <div className="flex flex-col text-secondary-500">
                 <div className="py-2">

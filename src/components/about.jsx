@@ -5,7 +5,7 @@ import { FaHouseCrack, FaHammer, FaHouseCircleCheck } from "react-icons/fa6";
 
 const About = () => {
   return (
-    <section id="about" className="py-24">
+    <section id="about" className="pt-24">
       <MainContainer>
         <header className="flex flex-col items-center justify-center text-center">
           <Title>About Mr. Quick Fix</Title>
