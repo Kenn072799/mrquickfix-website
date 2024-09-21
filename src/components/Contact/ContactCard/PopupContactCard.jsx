@@ -259,9 +259,11 @@ const PopupContactCard = ({ isOpen, onClose }) => {
               </a>
             </div>
 
-            <div className="mt-5 flex flex-col">
+            <div className="mt-2 flex flex-col">
               <a
-                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://facebook.com/MLIMrQuickFix"
                 className="flex items-center rounded-md border px-4 py-2 hover:bg-secondary-50"
               >
                 <FaFacebookF className="mr-4 text-sm md:text-base" />
