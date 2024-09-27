@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { FaXmark, FaPhone, FaFacebookF, FaEnvelope } from "react-icons/fa6";
 import { validateForm } from "../../hooks/validateForm";
 import ReCAPTCHA from "react-google-recaptcha";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PopupContactCard = ({ isOpen, onClose }) => {
   const [showContactInfo, setShowContactInfo] = useState(false);
@@ -50,7 +52,6 @@ const PopupContactCard = ({ isOpen, onClose }) => {
     } else {
       setLoading(true);
 
-      // Send form data to API
       try {
         const response = await fetch("API_URL", {
           method: "POST",
@@ -68,6 +69,8 @@ const PopupContactCard = ({ isOpen, onClose }) => {
         console.log("Form Submitted", formValues);
         console.log("Server Response:", data);
 
+        toast.success("Form submitted successfully!");
+
         setFormValues({
           firstName: "",
           lastName: "",
@@ -78,6 +81,7 @@ const PopupContactCard = ({ isOpen, onClose }) => {
         setRecaptchaToken(null);
       } catch (error) {
         console.error("Error submitting data:", error);
+        toast.error("There was an error submitting the form.");
       } finally {
         setLoading(false);
       }
@@ -102,7 +106,7 @@ const PopupContactCard = ({ isOpen, onClose }) => {
 
         {!showContactInfo ? (
           <div className="font-roboto md:mt-3">
-            <h1 className="text-2xl font-bold">Fill in the form</h1>
+            <h1 className="text-2xl font-bold">Send us inquiry, fill in the form</h1>
             <form onSubmit={handleSubmit}>
               <div className="flex gap-2">
                 <div className="mt-2">
@@ -285,6 +289,7 @@ const PopupContactCard = ({ isOpen, onClose }) => {
             </div>
           </div>
         )}
+        <ToastContainer />
       </div>
     </section>
   );
