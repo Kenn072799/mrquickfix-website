@@ -48,7 +48,7 @@ const Testimonials = () => {
                     slidesPerView: 2,
                   },
                 }}
-                className="mx-auto py-6"
+                className="mx-auto w-full py-6"
               >
                 {data.map((testimonial) => (
                   <SwiperSlide key={testimonial.id}>

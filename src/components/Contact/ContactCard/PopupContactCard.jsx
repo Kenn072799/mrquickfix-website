@@ -8,11 +8,14 @@ import "react-toastify/dist/ReactToastify.css";
 const PopupContactCard = ({ isOpen, onClose }) => {
   const [showContactInfo, setShowContactInfo] = useState(false);
   const [formValues, setFormValues] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    message: "",
+    clientFirstName: "",
+    clientLastName: "",
+    clientEmail: "",
+    clientPhone: "",
+    clientMessage: "",
+    jobNotificationRead: false,
+    jobStatus: "inquiry",
+    createdBy: "Client",
   });
   const [formErrors, setFormErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -53,7 +56,7 @@ const PopupContactCard = ({ isOpen, onClose }) => {
       setLoading(true);
 
       try {
-        const response = await fetch("API_URL", {
+        const response = await fetch("http://localhost:5000/api/job-orders", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -65,18 +68,17 @@ const PopupContactCard = ({ isOpen, onClose }) => {
           throw new Error("Network response was not ok");
         }
 
-        const data = await response.json();
-        console.log("Form Submitted", formValues);
-        console.log("Server Response:", data);
-
         toast.success("Form submitted successfully!");
+        setInterval(() => onClose(), 3000);
 
         setFormValues({
-          firstName: "",
-          lastName: "",
-          email: "",
-          phone: "",
-          message: "",
+          clientFirstName: "",
+          clientLastName: "",
+          clientEmail: "",
+          clientPhone: "",
+          clientMessage: "",
+          jobStatus: "inquiry",
+          createdBy: "Client",
         });
         setRecaptchaToken(null);
       } catch (error) {
@@ -106,36 +108,38 @@ const PopupContactCard = ({ isOpen, onClose }) => {
 
         {!showContactInfo ? (
           <div className="font-roboto md:mt-3">
-            <h1 className="text-2xl font-bold">Send us inquiry, fill in the form</h1>
+            <h1 className="text-2xl font-bold">
+              Send us inquiry, fill in the form
+            </h1>
             <form onSubmit={handleSubmit}>
               <div className="flex gap-2">
                 <div className="mt-2">
                   <input
                     type="text"
-                    name="firstName"
+                    name="clientFirstName"
                     placeholder="First Name"
                     className="w-full rounded-md border border-secondary-500 px-4 py-2 outline-none"
-                    value={formValues.firstName}
+                    value={formValues.clientFirstName}
                     onChange={handleInputChange}
                   />
-                  {formErrors.firstName && (
+                  {formErrors.clientFirstName && (
                     <p className="mt-1 text-sm text-red-500">
-                      {formErrors.firstName}
+                      {formErrors.clientFirstName}
                     </p>
                   )}
                 </div>
                 <div className="mt-2">
                   <input
                     type="text"
-                    name="lastName"
+                    name="clientLastName"
                     placeholder="Last Name"
                     className="w-full rounded-md border border-secondary-500 px-4 py-2 outline-none"
-                    value={formValues.lastName}
+                    value={formValues.clientLastName}
                     onChange={handleInputChange}
                   />
-                  {formErrors.lastName && (
+                  {formErrors.clientLastName && (
                     <p className="mt-1 text-sm text-red-500">
-                      {formErrors.lastName}
+                      {formErrors.clientLastName}
                     </p>
                   )}
                 </div>
@@ -143,47 +147,49 @@ const PopupContactCard = ({ isOpen, onClose }) => {
               <div className="mt-2">
                 <input
                   type="email"
-                  name="email"
+                  name="clientEmail"
                   placeholder="Email Address"
                   className="w-full rounded-md border border-secondary-500 px-4 py-2 outline-none"
-                  value={formValues.email}
+                  value={formValues.clientEmail}
                   onChange={handleInputChange}
                 />
-                {formErrors.email && (
+                {formErrors.clientEmail && (
                   <p className="mt-1 text-sm text-red-500">
-                    {formErrors.email}
+                    {formErrors.clientEmail}
                   </p>
                 )}
               </div>
               <div className="mt-2">
                 <input
                   type="tel"
-                  name="phone"
+                  name="clientPhone"
                   inputMode="numeric"
                   pattern="[0-9]*"
                   maxLength={11}
                   placeholder="Phone Number"
                   className="w-full rounded-md border border-secondary-500 px-4 py-2 outline-none"
-                  value={formValues.phone}
+                  value={formValues.clientPhone}
                   onChange={handleInputChange}
                 />
-                {formErrors.phone && (
+                {formErrors.clientPhone && (
                   <p className="mt-1 text-sm text-red-500">
-                    {formErrors.phone}
+                    {formErrors.clientPhone}
                   </p>
                 )}
               </div>
 
               <div className="mt-2">
                 <textarea
-                  name="message"
+                  name="clientMessage"
                   placeholder="Tell us about your needs"
                   className="w-full rounded-md border border-secondary-500 px-4 py-2 outline-none"
-                  value={formValues.message}
+                  value={formValues.clientMessage}
                   onChange={handleInputChange}
                 />
-                {formErrors.message && (
-                  <p className="text-sm text-red-500">{formErrors.message}</p>
+                {formErrors.clientMessage && (
+                  <p className="text-sm text-red-500">
+                    {formErrors.clientMessage}
+                  </p>
                 )}
               </div>
               <div className="mt-2">

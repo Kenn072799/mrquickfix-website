@@ -5,6 +5,7 @@ import PopupContactCard from "../Contact/ContactCard/PopupContactCard";
 // AOS
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { Link } from "react-router-dom";
 
 const ServiceCard = ({ servicedata }) => {
   const { image, title, description } = servicedata;
@@ -19,8 +20,9 @@ const ServiceCard = ({ servicedata }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => {
-    setIsModalOpen(true);
+
+  const handleClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
   const closeModal = () => {
     setIsModalOpen(false);
@@ -77,10 +79,12 @@ const ServiceCard = ({ servicedata }) => {
           </div>
           <div className="absolute bottom-0 left-0 right-0 py-2 text-center text-xs font-light md:text-sm">
             <p>
-              Interested in this service?
-              <button className="pl-1 hover:underline" onClick={openModal}>
-                Contact us!
-              </button>
+              Want to see our projects?
+              <Link to="/Project">
+                <button className="pl-1 hover:underline" onClick={handleClick}>
+                  View here
+                </button>
+              </Link>
             </p>
           </div>
         </div>
