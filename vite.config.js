@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': {target: 'https://mrquickfix-dashboard-v2-1.onrender.com'}
+      '/api': {target: 'http://localhost:5000'}
     }
   }
 })

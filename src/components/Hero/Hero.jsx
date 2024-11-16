@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Button from "../button";
 import MainContainer from "../Container/MainContainer";
-import PopupContactCard from "../Contact/ContactCard/PopupContactCard";
 import BackgroundCarousel from "./BackgroundCarousel";
 
 // AOS library
 import AOS from "aos";
 import "aos/dist/aos.css";
+import ContactModal from "../Contact/ContactCard/ContactModal";
 
 const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -80,7 +80,7 @@ const Hero = () => {
           </Button>
         </section>
       </MainContainer>
-      <PopupContactCard isOpen={isModalOpen} onClose={closeModal} />
+      <ContactModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 };

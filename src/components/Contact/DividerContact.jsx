@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import BackgroundDivider from "../../assets/DividerIMG.jpg";
 import MainContainer from "../Container/MainContainer";
 import Button from "../button";
-import PopupContactCard from "./ContactCard/PopupContactCard";
+import ContactModal from "./ContactCard/ContactModal";
 
 const DividerContact = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
     setIsModalOpen(true);
+    document.body.classList.add("overflow-hidden");
   };
   const closeModal = () => {
     setIsModalOpen(false);
+    document.body.classList.remove("overflow-hidden");
   };
   return (
     <div className="relative">
@@ -33,7 +35,7 @@ const DividerContact = () => {
           </div>
         </MainContainer>
       </div>
-      <PopupContactCard isOpen={isModalOpen} onClose={closeModal} />
+      <ContactModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 };
