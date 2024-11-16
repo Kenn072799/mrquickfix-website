@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FaAngleUp } from "react-icons/fa6";
-import PopupContactCard from "../Contact/ContactCard/PopupContactCard";
 
 // AOS
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Link } from "react-router-dom";
+import ContactModal from "../Contact/ContactCard/ContactModal";
 
 const ServiceCard = ({ servicedata }) => {
   const { image, title, description } = servicedata;
@@ -89,7 +89,7 @@ const ServiceCard = ({ servicedata }) => {
           </div>
         </div>
       </div>
-      <PopupContactCard isOpen={isModalOpen} onClose={closeModal} />
+      <ContactModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 };
