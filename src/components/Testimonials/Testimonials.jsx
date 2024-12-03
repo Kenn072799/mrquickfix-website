@@ -51,7 +51,7 @@ const Testimonials = () => {
                 className="mx-auto w-full py-6"
               >
                 {data.map((testimonial) => (
-                  <SwiperSlide key={testimonial.id}>
+                  <SwiperSlide key={testimonial._id}>
                     <TestimonialCard
                       testimonialdata={testimonial}
                       loading={loading}

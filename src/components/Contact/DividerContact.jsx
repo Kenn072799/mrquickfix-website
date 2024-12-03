@@ -30,7 +30,7 @@ const DividerContact = () => {
           </p>
           <div className="flex justify-center py-2">
             <Button onClick={openModal} variant="outline" size="sm">
-              Contact us now
+              Inquire Now
             </Button>
           </div>
         </MainContainer>

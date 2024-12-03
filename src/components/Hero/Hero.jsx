@@ -76,7 +76,7 @@ const Hero = () => {
             data-aos="fade-up"
             data-aos-delay="400"
           >
-            Contact us for free consultation
+            Inquire for free consultation
           </Button>
         </section>
       </MainContainer>

@@ -3,7 +3,7 @@ import TopNav from "../components/navigation/TopNav";
 import MainNav from "../components/navigation/MainNav";
 import TopLine from "../components/navigation/TopLine";
 import Footer from "../components/Footer/Footer";
-import { TbPhoneCheck } from "react-icons/tb";
+import { TbNotes } from "react-icons/tb";
 import ContactModal from "../components/Contact/ContactCard/ContactModal";
 
 export const MainLayout = ({ children }) => {
@@ -26,9 +26,9 @@ export const MainLayout = ({ children }) => {
             className="group cursor-pointer rounded-full bg-primary-500 p-2 shadow-lg active:bg-primary-700 md:p-4"
             onClick={openModal}
           >
-            <TbPhoneCheck className="text-2xl text-white md:text-3xl" />
+            <TbNotes className="text-2xl text-white md:text-3xl" />
             <span className="absolute -left-16 top-5 hidden whitespace-nowrap rounded-full bg-secondary-950/90 px-4 py-2 text-xs uppercase text-white md:group-hover:block">
-              Contact Us
+              Inquire Now
             </span>
           </div>
         </div>

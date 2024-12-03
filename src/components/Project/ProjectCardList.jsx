@@ -16,7 +16,7 @@ const ProjectCardList = ({ data }) => (
     <section className="flex flex-wrap items-center justify-center">
       {data.length > 0 ? (
         data.map((project) => (
-          <ProjectCard key={project.id} projectdata={project} />
+          <ProjectCard key={project.projectID} projectdata={project} />
         ))
       ) : (
         <NoProjectAvailable />

@@ -6,7 +6,13 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const ProjectCard = ({ projectdata }) => {
-  const { thumbnail, name, images, category, date } = projectdata;
+  const {
+    projectThumbnail,
+    projectName,
+    projectImagesUrl,
+    projectServices,
+    createdAt,
+  } = projectdata;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
     setIsModalOpen(true);
@@ -15,7 +21,7 @@ const ProjectCard = ({ projectdata }) => {
     setIsModalOpen(false);
   };
 
-  useEffect(() => { 
+  useEffect(() => {
     AOS.init({
       duration: 1000,
       once: true,
@@ -25,8 +31,8 @@ const ProjectCard = ({ projectdata }) => {
   return (
     <div className="group relative m-2 h-[250px] w-[350px] overflow-hidden">
       <img
-        src={thumbnail}
-        alt={name}
+        src={projectThumbnail}
+        alt={projectName}
         className="h-full w-full cursor-pointer"
         onClick={openModal}
         data-aos="zoom-out"
@@ -37,18 +43,25 @@ const ProjectCard = ({ projectdata }) => {
         className="absolute inset-x-0 bottom-0 transform cursor-pointer bg-black/30 p-4 text-white backdrop-blur-sm transition-transform duration-500 md:translate-y-full md:group-hover:translate-y-0"
         onClick={openModal}
       >
-        <h3 className="font-outfit font-semibold md:text-lg">{name}</h3>
+        <h3 className="font-outfit font-semibold md:text-lg">{projectName}</h3>
         <p className="font-roboto text-xs md:text-sm">
-          Category: {category.join(", ")}
+          Services: {projectServices.join(", ")}
         </p>
-        <p className="font-roboto text-xs md:text-sm">Date: {date}</p>
+        <p className="font-roboto text-xs md:text-sm">
+          Date:{" "}
+          {new Date(createdAt).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
       </div>
 
       {/* Image Modal */}
       <ImageModal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
-        images={images}
+        images={projectImagesUrl}
       />
     </div>
   );

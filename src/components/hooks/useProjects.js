@@ -13,7 +13,7 @@ const useProjects = ({
   const cache = useRef({});
 
   useEffect(() => {
-    const cacheKey = `${selectedCategory}-${projectsPerPage}`;
+    const cacheKey = `${selectedCategory}-${projectsPerPage}-${limit}`;
 
     if (cache.current[cacheKey]) {
       const cachedData = cache.current[cacheKey];
@@ -26,37 +26,38 @@ const useProjects = ({
 
       setData(paginatedData);
     } else {
-      // Fetch new data if not cached
       const fetchData = async () => {
         setLoading(true);
         try {
-          const response = await fetch("/SampleData/ProjectData.json");
+          const response = await fetch("/api/projects/");
           if (!response.ok) throw new Error("Network response was not ok");
           const jsonData = await response.json();
+          const projectsData = Array.isArray(jsonData) ? jsonData : jsonData.data;
 
-          // Validate and filter data
-          let validatedData = jsonData.filter(
+          let validatedData = projectsData.filter(
             (item) =>
               item &&
-              item.id &&
-              item.date &&
-              item.thumbnail &&
-              item.name &&
-              item.category
+              item.projectID &&
+              item.createdAt &&
+              item.projectThumbnail &&
+              item.projectName &&
+              item.projectServices
           );
 
-          // Sort projects by date
           validatedData = validatedData.sort(
-            (a, b) => new Date(b.date) - new Date(a.date)
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
           );
 
           if (selectedCategory && selectedCategory !== "Latest") {
             validatedData = validatedData.filter((project) =>
-              project.category.includes(selectedCategory)
+              project.projectServices.includes(selectedCategory)
             );
           }
 
-          // Cache the filtered data
+          if (limit) {
+            validatedData = validatedData.slice(0, limit);
+          }
+
           cache.current[cacheKey] = {
             data: validatedData,
             totalProjects: validatedData.length,
@@ -70,7 +71,7 @@ const useProjects = ({
           setData(paginatedData);
         } catch (error) {
           console.error("Error loading JSON:", error);
-          setError("Failed to load projects.");
+          setError(error.message || "Failed to load projects.");
         } finally {
           setLoading(false);
         }

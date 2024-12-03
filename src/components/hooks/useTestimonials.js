@@ -9,23 +9,23 @@ const useTestimonials = (limit = null) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await fetch("/SampleData/TestimonialData.json");
+        const response = await fetch("/api/testimonial/");
         if (!response.ok) throw new Error("Network response was not ok");
         const jsonData = await response.json();
 
-        // Validate and process data
-        let validatedData = jsonData.filter(
+        const testimonialsData = Array.isArray(jsonData) ? jsonData : jsonData.data;
+
+        let validatedData = testimonialsData.filter(
           (item) =>
             item &&
-            item.id &&
-            item.name &&
-            item.image &&
-            item.feedback &&
-            item.date
+            item.jobID &&
+            item.status === "Published" && // change to "Published"
+            item.feedbackMessage &&
+            item.createdAt
         );
 
         validatedData = validatedData.sort(
-          (a, b) => new Date(b.date) - new Date(a.date)
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         );
 
         if (limit) {

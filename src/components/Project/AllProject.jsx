@@ -21,7 +21,7 @@ const AllProject = () => {
 
   const categories = [
     "Latest",
-    "Fits-out",
+    "Fits-outs (Painting, Carpentry, Masonry)",
     "Electrical Works",
     "Kitchen and Bath Renovation",
     "Aircon Services",
