@@ -17,7 +17,7 @@ const Services = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/services/");
+        const response = await fetch("https://mrquickfix-dashboard-v2-1.onrender.com/api/services/");
         if (!response.ok) {
           throw new Error("Failed to fetch services");
         }

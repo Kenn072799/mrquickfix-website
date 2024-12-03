@@ -9,7 +9,7 @@ const useTestimonials = (limit = null) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await fetch("/api/testimonial/");
+        const response = await fetch("https://mrquickfix-dashboard-v2-1.onrender.com/api/testimonial/");
         if (!response.ok) throw new Error("Network response was not ok");
         const jsonData = await response.json();
 

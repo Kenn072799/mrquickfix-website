@@ -29,7 +29,7 @@ const useProjects = ({
       const fetchData = async () => {
         setLoading(true);
         try {
-          const response = await fetch("/api/projects/");
+          const response = await fetch("https://mrquickfix-dashboard-v2-1.onrender.com/api/projects/");
           if (!response.ok) throw new Error("Network response was not ok");
           const jsonData = await response.json();
           const projectsData = Array.isArray(jsonData) ? jsonData : jsonData.data;
